@@ -20,8 +20,21 @@ def build_token_to_id_vocab(sentences, specials=('<pad>', '<bos>', '<eos>', '<un
                 next_id += 1
     return vocab
 
-# Step 2 - build_id_to_token_vocab (not yet solved)
-# TODO: implement
+# Step 2 - build_id_to_token_vocab
+def build_token_to_id_vocab(sentences, specials=('<pad>', '<bos>', '<eos>', '<unk>')):
+    # TODO: build a token-to-id dict with specials first, then corpus tokens in first-seen order.
+    vocab = {}
+    # add special tokens first, assign ids 0,1,2...
+    for token in specials:
+        vocab[token] = len(vocab)
+    
+    # iterate sentences, whitespace split, add new tokens in first-seen order
+    for sent in sentences:
+        tokens = sent.split()
+        for tok in tokens:
+            if tok not in vocab:
+                vocab[tok] = len(vocab)
+    return vocab
 
 # Step 3 - encode_sentence_to_ids (not yet solved)
 # TODO: implement
